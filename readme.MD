@@ -12,7 +12,7 @@
 
 # Open Port 9500 to the checking computer IP ONly
 
-`sudo ufw allow from 86.81.155.21 to any port 9500`
+`sudo ufw allow from 86.81.155.21 to any port 9501`
 
 # restart Harmony and ufw
 
@@ -21,3 +21,8 @@ sudo service harmony restart
 sudo ufw disable
 sudo ufw enable
 ```
+
+
+# restart instance Contabo
+
+https://api.contabo.com/#operation/restart

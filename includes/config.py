@@ -1,17 +1,14 @@
 import logging, sys, json, os
-from utils.helpers import create_data_path
-from includes.parse_envs import Envs
+from includes.config_utils import Envs, parse_node_list, create_data_path
 
 envs = Envs()
-create_data_path("", data_path='logs')
-create_data_path("", data_path='data')
+create_data_path("", data_path="logs")
+create_data_path("", data_path="data")
 
-port = 9500
+port = 9501
 # Pair up nodes that compliment each other.  Sames Keys, Different Nodes.
 #  if 1 goes down, the other will come up.
-nodes = {
-f"http://154.53.50.54:{port}": f"http://66.94.122.253:{port}"  # west
-}
+nodes = parse_node_list(port=port)
 
 # LOGGING
 file_handler = logging.FileHandler(filename=os.path.join("logs", "data.log"))
