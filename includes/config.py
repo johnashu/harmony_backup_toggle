@@ -3,13 +3,12 @@ from utils.helpers import create_data_path
 from includes.parse_envs import Envs
 
 envs = Envs()
-for x in envs.nodes:
-    print(x)
 create_data_path("", data_path='logs')
 create_data_path("", data_path='data')
 
 port = 9500
-# pair up nodes that complement each other.. if 1 goes down, the other will come up.
+# Pair up nodes that compliment each other.  Sames Keys, Different Nodes.
+#  if 1 goes down, the other will come up.
 nodes = {
 f"http://154.53.50.54:{port}": f"http://66.94.122.253:{port}"  # west
 }
