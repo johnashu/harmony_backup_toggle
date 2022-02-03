@@ -1,5 +1,13 @@
 import logging, sys, json, os
+import socket
 from includes.config_utils import Envs, parse_node_list, create_data_path
+
+hostname = socket.gethostname()
+print(hostname)
+externalIP = os.popen("curl -s ifconfig.me").readline()
+print(externalIP)
+
+monitor_services = ("86.81.155.21", "86.81.155.21")
 
 envs = Envs()
 create_data_path("", data_path="logs")

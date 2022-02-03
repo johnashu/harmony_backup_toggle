@@ -1,34 +1,14 @@
 {
-    "blockHash": "0x8e30e2adc5b4d17dbeef1a8414cf89ceb1ef5544326e01f1614223a6e4f09bf6",
-    "blockNumber": 22514955,
-    "crossLinks": [
-        {
-            "block-number": 24450011,
-            "epoch-number": 860,
-            "hash": "0x53c0d8e886f902c1151a31b45e6eae64fa26e69ef1f9818e1482dedf02066cf0",
-            "shard-id": 1,
-            "signature": "125295b5f0119e8827fd9eef27821eb327f69ffbe7046d0383056c1aa1af0e92940e334c2cc307b4fc22f8441d8f0a03267d4aa37cb8681f73f6ac781b13dec38725da927a9b2ffc1e04722d79e0c506780ec9678c17e2ed4c54de92ee5ddd03",
-            "signature-bitmap": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0f",
-            "view-id": 24452703
-        },
-        {
-            "block-number": 24587160,
-            "epoch-number": 860,
-            "hash": "0x017637e750742c6b9b289f092bc04c1ed030b1f445960cfe8a49fa7e551ce50d",
-            "shard-id": 2,
-            "signature": "7e758200c5d65d60514835d202687a9757bfe1b1c2f7fda4324434bc5c894a26326690da7697569008fb73209f46ea13a4ea796101faa4f4a811c1137b502f11f14f66397c3ddfeb16bbb36bc15717ba3fde4781e874abed8928141e258c2d8b",
-            "signature-bitmap": "ffffff87fff0ffffffffffffffffffffdfffffffffffffffffffffffffffff01",
-            "view-id": 24587556
-        }
-    ],
+    "blockHash": "0x22b59b17ae0e9dbc6724b95c20d3470ea6e17f98798580e42639f3dcd270a631",
+    "blockNumber": 24594422,
     "epoch": 860,
-    "lastCommitBitmap": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f000c",
-    "lastCommitSig": "e39c37b8d8fd2186574ab350ab16361ace1487fc9a5321b1ee0f22f6b911be2ee1cf563f88567d16e2de319753e4b4027855b4e7284f29a8db45683847ff6b114c399f46aeda8a4a0ecd90a884147014d3b61b08a291bd68415fee9735852795",
-    "leader": "one1jyvcqu4k0rszgf3r2a02tm89dzd68arw5lz9vl",
-    "shardID": 0,
-    "timestamp": "2022-02-03 10:24:20 +0000 UTC",
-    "unixtime": 1643883860,
-    "viewID": 22516810,
-    "vrf": "a72d1a02d5af93299bf1c3e7cfe8e6f8526b0e2ddb8d8758b86502e48bb94d08",
-    "vrfProof": "9b14388532f477eebd6d4c389b5268b9fb4a286ca8ba083694589e7ae0cdcf70648cc2066bcaed2794154b8ba092bf0c1cd7f04b4988837aa5e991c334d94754d813e043f7263592e73bf2312aed41602cdf326b4c00979363293d0b21ceca83"
+    "lastCommitBitmap": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff01",
+    "lastCommitSig": "1a31f9c0ddad3d6d1dcda8312fc99f3fd1650482983c33d7e49c0c82fd8d786813a0208c3594f3652aca5631bccbf1191c2a6f7936feaa1f6d774d63b1a8ab54f8ad3ff2306d3e817a55c9fa036cb772a5ca2e76ec436048d82ade26ad2cd308",
+    "leader": "one1xdnm2fj6hyk7e49af2h9dmudkdlta9q354094e",
+    "shardID": 2,
+    "timestamp": "2022-02-03 14:26:19 +0000 UTC",
+    "unixtime": 1643898379,
+    "viewID": 24594818,
+    "vrf": "b880209f5510919fc653d1f71059fd415914ae3ff7bac3f633ba4b7ebc4d52a0",
+    "vrfProof": "30860ab60a07e579d849522a45fcfdde462891e7a39b364e303994b522f521fc4042e913239213d8ead6052178ba4407f8c6d5d27e234c0ce6838d93e07247ccc4d25a1f3de799520aab7b39f77cc3fb3949ac700860dbb3926e31eb381c6491"
 }

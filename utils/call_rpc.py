@@ -1,21 +1,31 @@
-from requests import post
+import aiohttp
 from includes.config import *
-
 from typing import Union, Tuple
 
 
 class RPC:
-    def __init__(self, node: str) -> None:
+    def __init__(self, node: str, session: aiohttp.ClientSession) -> None:
+        self.session = session()
         self.node = node
         self.shard = 0
         self.local_metadata = {}
         self.external_headers = {}
 
-    def save_data(self, fn: str, data: Union[dict, str]) -> None:
+    async def close_session(self) -> None:
+        """Close Async Session"""
+        await self.session.close()
+
+    def save_data(self, fn: str, data: dict) -> None:
+        """Save response data to json file.
+
+        Args:
+            fn (str): Filename to save
+            data (dict): dict to save to Json
+        """
         with open(os.path.join("data", f"{fn}.json"), "w") as j:
             json.dump(data, j, indent=4)
 
-    def call_rpc_single_page(
+    async def call_rpc_single_page(
         self,
         method: str,
         rpc_endpoint: str,
@@ -39,17 +49,18 @@ class RPC:
         headers = {"Content-Type": "application/json"}
 
         d = {"jsonrpc": "2.0", "method": method, "params": params, "id": str(_id)}
-
-        data = post(rpc_endpoint, json=d, headers=headers)
-
-        try:
-            data = data.json()["result"]
-        except json.decoder.JSONDecodeError:
-            data = {"RAW Data": data.text}
+        async with self.session.post(
+            rpc_endpoint, json=d, headers=headers, verify_ssl=False
+        ) as resp:
+            try:
+                data = await resp.json()
+                data = data["result"]
+            except json.decoder.JSONDecodeError:
+                data = {"RAW Data": await resp.text()}
         self.save_data(fn, data)
         return data
 
-    def toggle_flag(self, toggle: bool = True, **kw) -> bool:
+    async def toggle_flag(self, toggle: bool = True, **kw) -> bool:
         """Turn Flag on (True) / off (False)
 
         Args:
@@ -60,29 +71,31 @@ class RPC:
             bool: confirmation flag was successful.
         """
         try:
-            toggle = self.call_rpc_single_page(
+            toggle = await self.call_rpc_single_page(
                 "hmy_setNodeToBackupMode", self.node, [toggle], _id=1, **kw
             )
             return toggle
         except Exception as e:
             log.error(e)
 
-    def get_external_data(self) -> Tuple[int, int, int]:
+    async def get_external_data(self) -> Tuple[int, int, int]:
+        await self._update_latest_headers()
         return (
             self.external_headers.get("viewID"),
             self.external_headers.get("epoch"),
             self.external_headers.get("blockNumber"),
         )
 
-    def get_flag_status(self) -> bool:
+    async def get_flag_status(self) -> bool:
         """Check the status of the backup flag for the node passed.
 
         Returns:
             bool: Status of the flag ON (True) / OFF (False)
         """
+        await self._update_node_metadata()
         return self.local_metadata.get("is-backup")
 
-    def update_latest_headers(self) -> Tuple[int, int, int]:
+    async def _update_latest_headers(self) -> Tuple[int, int, int]:
         """Returns the latest ViewId, epoch and blockNumber from Harmony External Node for the Shard passed.
 
         Args:
@@ -92,7 +105,7 @@ class RPC:
             tuple: Current External Nodes ( ViewId , epoch, blocknumber)
         """
         try:
-            header = self.call_rpc_single_page(
+            header = await self.call_rpc_single_page(
                 "hmyv2_latestHeader",
                 f"https://api.s{self.shard}.t.hmny.io",
                 [],
@@ -100,18 +113,17 @@ class RPC:
                 fn="external-header",
             )
             self.external_headers = header
-            return header
         except Exception as e:
             log.error(e)
 
-    def update_node_metadata(self, **kw: dict) -> None:
+    async def _update_node_metadata(self, **kw: dict) -> None:
         """Returns the latest metadata from Harmony Local Node.
 
         Args:
             node (str): http address of the node to check.
         """
         try:
-            metadata = self.call_rpc_single_page(
+            metadata = await self.call_rpc_single_page(
                 "hmyv2_getNodeMetadata", self.node, [], _id=1, **kw
             )
             self.local_metadata = metadata
