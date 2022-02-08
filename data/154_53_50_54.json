@@ -39,27 +39,27 @@
         "vrf-epoch": 631
     },
     "consensus": {
-        "blocknum": 24594423,
-        "finality": 340,
-        "mode": "Normal",
+        "blocknum": 24790104,
+        "finality": 400,
+        "mode": "NormalBackup",
         "phase": "Announce",
-        "viewChangeId": 24592322,
-        "viewId": 24594819
+        "viewChangeId": 24787149,
+        "viewId": 24790500
     },
-    "current-block-number": 24594422,
-    "current-epoch": 860,
+    "current-block-number": 24790103,
+    "current-epoch": 865,
     "dns-zone": "t.hmny.io",
     "is-archival": false,
-    "is-backup": false,
+    "is-backup": true,
     "is-leader": false,
     "network": "mainnet",
-    "node-unix-start-time": 1643879634,
+    "node-unix-start-time": 1644283111,
     "p2p-connectivity": {
-        "connected": 936,
-        "not-connected": 138,
-        "total-known-peers": 1074
+        "connected": 662,
+        "not-connected": 150,
+        "total-known-peers": 812
     },
-    "peerid": "QmYMECZtQexULdkDoQgnG7HhPn3XMKbA1brTWRZsL5c9K4",
+    "peerid": "QmXXyvqPGUAV9avVqgrAiuqtRUPUssBeHC2Ygqd8F5Ju2D",
     "role": "Validator",
     "shard-id": 2,
     "sync-peers": null,

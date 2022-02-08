@@ -1,0 +1,14 @@
+{
+    "blockHash": "0xfa7b67e5ff1e01c922af13c6f00b077b726730447da9b264f393bd120db3d843",
+    "blockNumber": 24790103,
+    "epoch": 865,
+    "lastCommitBitmap": "ffffffffff87fffffffffffffffffbfffffffffffdffffffffffffffffff03",
+    "lastCommitSig": "425ae58156c26ef8aed80479cf34abf9f2b39a36a1b8c02b0b080e9378b1807c96f0f585f720ad87d462115bf7a2fe094a28c984e41ad754e9e049fac1f924fa20233b413ccac16eb5d743f8798fb5099bfcaf146baabe1d4575fdb0463acc0b",
+    "leader": "one1xdnm2fj6hyk7e49af2h9dmudkdlta9q354094e",
+    "shardID": 2,
+    "timestamp": "2022-02-08 03:10:19 +0000 UTC",
+    "unixtime": 1644289819,
+    "viewID": 24790499,
+    "vrf": "c480139ff7c017bddb8a0d234ad0a1b615bae914358b7de3ce2eda21b3b52966",
+    "vrfProof": "a801289b3ba5e455a7576cf2094ec1299acfd7a29f875d40869a9bf604bad407a1a7f4da4fa412baf44822c5dd732909830353254987af85279031063f644009dba2dacad40b5ca5f22dec756987994705dcf4bb1c30d5687a98109517cb0b0b"
+}

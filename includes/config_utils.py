@@ -10,14 +10,21 @@ def create_data_path(pth: str, data_path: str = "data") -> os.path:
     return p
 
 
-def parse_node_list(port: int = 9501) -> dict:
+def parse_node_list(_http: str = "http", port: int = 9501) -> list:
     with open(os.path.join("includes", "node_pairs.csv"), newline="") as csvfile:
-        d = {}
+        d = []
         r = csv.reader(csvfile, delimiter=",")
         for row in r:
             signing = row[0]
-            backup = row[1]
-            d.update({f"http://{signing}:{port}": f"http://{backup}:{port}"})
+            s_name = row[1]
+            backup = row[2]
+            b_name = row[3]
+            d.append(
+                {
+                    "Signer": {"name": s_name, "ip": f"{_http}://{signing}:{port}"},
+                    "Backup": {"name": b_name, "ip": f"{_http}://{backup}:{port}"},
+                }
+            )
         return d
 
 

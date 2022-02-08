@@ -67,7 +67,12 @@ sudo ufw disable
 sudo ufw enable
 ```
 
+Create CSV file (comma seperated) with the following info (No Header)
+
+Signer IP  |  Signer Nickname  | BackUp IP  |  BackUp NickName
 154.53.50.54,66.94.122.253
+
+
 curl --location --request POST 'http://66.94.122.253:9501/' --header 'Content-Type: application/json' --data-raw '{"jsonrpc": "2.0","method" : "hmy_getNodeMetadata","params": [],"id": 1}' | jq
 # restart instance Contabo
 https://api.contabo.com/#operation/restart

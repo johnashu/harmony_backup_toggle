@@ -1,14 +1,16 @@
-from utils.call_rpc import RPC, aiohttp
+from utils.call_rpc import RPC
 
 
-def create_nodes_dict(node_pairs: dict) -> RPC:
-    d = {}
-    c = 1
-    for node1_ip, node2_ip in node_pairs.items():
-        rpc1 = RPC(node1_ip, aiohttp.ClientSession)
-        rpc2 = RPC(node2_ip, aiohttp.ClientSession)
-        d.update({f"node_pair_{c}": {"Signer": rpc1, "Backup": rpc2}})
-        c += 1
+def create_nodes_dict(node_pairs: dict) -> list:
+    d = []
+    for x in node_pairs:
+        signing_node_ip = x["Signer"]["ip"]
+        backup_node_ip = x["Backup"]["ip"]
+        signing_node_name = x["Signer"]["name"]
+        backup_node_name = x["Backup"]["name"]
+        rpc1 = RPC(signing_node_ip, signing_node_name)
+        rpc2 = RPC(backup_node_ip, backup_node_name)
+        d.append({"Signer": rpc1, "Backup": rpc2})
     return d
 
 
