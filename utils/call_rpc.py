@@ -11,7 +11,7 @@ class RPC:
         self.shard = 0
         self.local_metadata = {}
         self.external_headers = {}
-        self.errors = []
+        self.messages = []
 
     async def close_session(self) -> None:
         """Close Async Session"""
@@ -63,11 +63,11 @@ class RPC:
         except (json.decoder.JSONDecodeError, KeyError, TypeError) as e:
             data = {"error": f"Json Error:  {await resp.text()}"}
             log.error(e)
-            self.errors.append(data)
+            self.messages.append(data)
         except (aiohttp.ClientConnectorError, aiohttp.ClientOSError) as e:
             log.error(e)
             data = {"error": f"Cannot Connect:  {e}"}
-            self.errors.append(data)
+            self.messages.append(data)
         self.save_data(f"{rpc_endpoint}-{fn}", data)
         return res, data
 

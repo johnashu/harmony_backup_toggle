@@ -22,13 +22,8 @@ async def check_and_update_flag(node_type: str, rpc: RPC) -> bool:
     return False
 
 
-# 1a.  Check mode == Normal for signing and NormalBackup for backup - Can be syncing and handled with the blocks misaligned
-
-
 # 2.  Cross reference viewId and make sure they are in sync.  If not throw an Error and send alert.
 # 2a. A threshold should be set (X blocks out of sync) to switch signing if the sync is too far out.
-
-
 async def check_view_id_sync(rpc: RPC) -> bool:
     """Display Harmony External Node data from a Local Node Session
 
@@ -48,22 +43,25 @@ async def check_view_id_sync(rpc: RPC) -> bool:
             f"\nBlock Number External  ::  {block_number}\nBlock Number Internal  ::  {iblock_number}"
         )
         view_id_diff = int(iview_id) - int(view_id)
-        if view_id_diff >= OUT_OF_SYNC_THRES:
-            err = f"ViewId out of sync : {view_id_diff}"
-            rpc.errors.append(err)
+        log.info(f"View ID Difference between nodes = {view_id_diff}")
+        if view_id_diff <= -envs.OUT_OF_SYNC_THRES:
+            err = {"error": f"ViewId out of sync : {view_id_diff}"}
+            rpc.messages.append(err)
             return False
         return True
     return False
 
 
 # 3.  If no response is found, turn on the backup flag and switch the nodes around in the dict.
-
-
 async def swap_roles(i: int, v: dict, nodes_to_monitor: dict) -> dict:
     swapped = swap_signer_backup(v)
     nodes_to_monitor[i] = swapped
     for node_type, rpc in v.items():
-        log.info(f"New Node Type: {node_type} | Name:  {rpc.name}  |  IP: {rpc.node}")
+        swapped_msg = {
+            "swapped": f"New Node Type: {node_type} | Name:  {rpc.name}  |  IP: {rpc.node}"
+        }
+        log.info(swapped_msg["swapped"])
+        rpc.messages.append(swapped_msg)
     return nodes_to_monitor
 
 
@@ -76,11 +74,34 @@ async def check_other_monitors_alive(monitor_services: tuple) -> bool:
 
 # 5. Sleep Eat Repeat.
 async def chillax() -> None:
-    log.info(f"All Nodes checked, sleeping for {DELAY_BETWEEN_CHECKS} seconds")
-    await asyncio.sleep(DELAY_BETWEEN_CHECKS)
+    log.info(f"All Nodes checked, sleeping for {envs.DELAY_BETWEEN_CHECKS} seconds")
+    await asyncio.sleep(envs.DELAY_BETWEEN_CHECKS)
 
 
-async def check(nodes_to_monitor: dict) -> dict:
+async def send_email_alerts(rpc: RPC) -> None:
+    from utils._email import send_email
+
+    subject = f"Backup Monitor Alerts - {rpc.name.title()}"
+    msg = f"The following actions have occured for [ {rpc.name} ] at address: [ {rpc.node} ]\n\n"
+    for x in rpc.messages:
+        for k, v in x.items():
+            msg += f"{k.title()}: {v}\n\n"
+    await send_email(subject, msg)
+
+
+async def send_alerts(nodes_to_monitor: list) -> None:
+    for i, x in enumerate(nodes_to_monitor):
+        for _, rpc in x.items():
+            if rpc.messages:
+                log.info(f"Sending Alerts for Node Pair {i+1}..")
+                log.debug(rpc.messages)
+                email_sent = await send_email_alerts(rpc)
+                if email_sent:
+                    rpc.messages = []
+                    log.info(rpc.messages)
+
+
+async def check(nodes_to_monitor: list) -> dict:
     for i, x in enumerate(nodes_to_monitor):
         swap = False
         log.info(f"Checking Node Pair {i+1}")
@@ -88,11 +109,11 @@ async def check(nodes_to_monitor: dict) -> dict:
             in_correct_state = await check_and_update_flag(node_type, rpc)
             if not in_correct_state:
                 swap = True
-                log.error(rpc.errors)
+                log.error(rpc.messages)
             view_id_synced = await check_view_id_sync(rpc)
             if not view_id_synced:
                 swap = True
-                log.error(rpc.errors)
+                log.error(rpc.messages)
         if swap:
             nodes_to_monitor = await swap_roles(i, x, nodes_to_monitor)
     return nodes_to_monitor
@@ -107,22 +128,26 @@ async def close_all_sessions(nodes_to_monitor: dict) -> None:
     for i, x in enumerate(nodes_to_monitor):
         log.info(f"Ending Nodes Sessions for  Node Pair {i+1}")
         for node_type, rpc in x.items():
-            log.info(f"Ending Session for {node_type} Node |  {rpc.node}")
+            log.info(
+                f"Ending Session for  {node_type} | Name:  {rpc.name} IP: {rpc.node}"
+            )
             await rpc.close_session()
 
 
-async def main():
-    nodes_to_monitor = create_nodes_dict(nodes)
+async def main() -> None:
     i = 1
     while 1:
         try:
+            nodes, monitor_services = hot_reload_data(envs)
+            nodes_to_monitor = create_nodes_dict(nodes)
             log.info(f"Running Async Number {i}")
             nodes_to_monitor = await check(nodes_to_monitor)
             await check_other_monitors_alive(monitor_services)
+            await send_alerts(nodes_to_monitor)
             await chillax()
+            await close_all_sessions(nodes_to_monitor)
         except Exception as e:
             log.error(f"A general Erorr occurred in the main loop : {e}")
-    await close_all_sessions(nodes_to_monitor)
 
 
 if __name__ == "__main__":

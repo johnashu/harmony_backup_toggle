@@ -1,0 +1,34 @@
+{
+    "blockHash": "0x6029bbfc4505e3fe01a85bc0f0278bae2d709d0206675c6f6559ffc22ff5276a",
+    "blockNumber": 22724128,
+    "crossLinks": [
+        {
+            "block-number": 24672016,
+            "epoch-number": 866,
+            "hash": "0x8880948c4041d37ad8a26c8589e85e1cfead5f26de0fd08d50470ee9afa2b6e7",
+            "shard-id": 1,
+            "signature": "67b056e6aed60f66f1c09d95a3822a784c29b6d0818432dd72421b145fa43a18a126f2f6eff18c0774dc50941a0eb70e1628eaac0f5f766b2cf771f27ded40b95cbfa4399d53eca8ae133a3dc32742f9f050d2874aeb3e46d8882225f8354f86",
+            "signature-bitmap": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff01",
+            "view-id": 24674708
+        },
+        {
+            "block-number": 24809154,
+            "epoch-number": 866,
+            "hash": "0x11aa4a8e6911f66a1f7df0b02d11731c4011d4b91bfc1760edb02d50a7697184",
+            "shard-id": 2,
+            "signature": "a9b0caa9cac75b34ce8f2d8bd7ff1955f287b6b337e8a1fc24f40c17e350dbe3069d731d9bdef14c3c80e5814e3c940b141a61a8eca53bdf2d93492654beff8e36b4fc71962afd97fde514e0655e2ba79515d04b5c08c734d4559f3fccb2d00b",
+            "signature-bitmap": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff07",
+            "view-id": 24809550
+        }
+    ],
+    "epoch": 866,
+    "lastCommitBitmap": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "lastCommitSig": "df296d87a38fc9f0dc3ce845fb4d4e7c8ee8e14e9de3367f90a723d13f9ccb1a975b4e913d1b5aca8caf9c425f8d8d0c2a1d5d37b1a0179ddb5108a35fdba8865225e2032132120048fd57adbced38137725bd25bc5b722578f70f64e5a91993",
+    "leader": "one1nn2c86kwaq4nk8lda50fnepepqr9y73kd9w2z3",
+    "shardID": 0,
+    "timestamp": "2022-02-08 13:45:34 +0000 UTC",
+    "unixtime": 1644327934,
+    "viewID": 22726003,
+    "vrf": "e9e77f4319e7a6b322837438f02f821d436a8d50792a8b0b9d4c6261e8125fc6",
+    "vrfProof": "4de6df1eacba0c788ed49ea55552f4802cb844f249b10313f0cf9cac85b501bad8e89d513969b1f4099a694661de430e14ac43798de92c9b7d6173fc0463b97c51299506a0a60af74fca0caa2d31029ad2906f4c00a688102b43a46fd257ba05"
+}

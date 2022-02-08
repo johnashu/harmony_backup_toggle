@@ -1,25 +1,10 @@
 import logging, sys, json, os
 import socket
-from includes.config_utils import Envs, parse_node_list, create_data_path
-
-hostname = socket.gethostname()
-print(hostname)
-externalIP = os.popen("curl -s ifconfig.me").readline()
-print(externalIP)
-
-DELAY_BETWEEN_CHECKS = 60
-OUT_OF_SYNC_THRES = 20
-
-monitor_services = ("86.81.155.21", "86.81.155.21")
+from includes.config_utils import Envs, hot_reload_data, create_data_path
 
 envs = Envs()
 create_data_path("", data_path="logs")
 create_data_path("", data_path="data")
-
-port = "9501"
-# Pair up nodes that compliment each other.  Sames Keys, Different Nodes.
-#  if 1 goes down, the other will come up.
-nodes = parse_node_list(port=port, _http="http")
 
 states = dict(Signer=False, Backup=True)
 
@@ -36,3 +21,8 @@ logging.basicConfig(
 )
 
 log = logging.getLogger()
+
+hostname = socket.gethostname()
+log.info(hostname)
+externalIP = os.popen("curl -s ifconfig.me").readline()
+log.info(externalIP)

@@ -39,15 +39,15 @@
         "vrf-epoch": 631
     },
     "consensus": {
-        "blocknum": 24790104,
-        "finality": 392,
+        "blocknum": 24809167,
+        "finality": 430,
         "mode": "Normal",
-        "phase": "Announce",
-        "viewChangeId": 24787229,
-        "viewId": 24790500
+        "phase": "Commit",
+        "viewChangeId": 24808602,
+        "viewId": 24809563
     },
-    "current-block-number": 24790103,
-    "current-epoch": 865,
+    "current-block-number": 24809166,
+    "current-epoch": 866,
     "dns-zone": "t.hmny.io",
     "is-archival": false,
     "is-backup": false,
@@ -55,9 +55,9 @@
     "network": "mainnet",
     "node-unix-start-time": 1644274619,
     "p2p-connectivity": {
-        "connected": 942,
-        "not-connected": 139,
-        "total-known-peers": 1081
+        "connected": 1047,
+        "not-connected": 189,
+        "total-known-peers": 1236
     },
     "peerid": "QmYMECZtQexULdkDoQgnG7HhPn3XMKbA1brTWRZsL5c9K4",
     "role": "Validator",

@@ -1,14 +1,14 @@
 {
-    "blockHash": "0xfa7b67e5ff1e01c922af13c6f00b077b726730447da9b264f393bd120db3d843",
-    "blockNumber": 24790103,
-    "epoch": 865,
-    "lastCommitBitmap": "ffffffffff87fffffffffffffffffbfffffffffffdffffffffffffffffff03",
-    "lastCommitSig": "425ae58156c26ef8aed80479cf34abf9f2b39a36a1b8c02b0b080e9378b1807c96f0f585f720ad87d462115bf7a2fe094a28c984e41ad754e9e049fac1f924fa20233b413ccac16eb5d743f8798fb5099bfcaf146baabe1d4575fdb0463acc0b",
+    "blockHash": "0xc1f684a9b5ecdaf991ac118e9a3ff90967dacf3fb943d63aeef34bdcdf98e24c",
+    "blockNumber": 24809166,
+    "epoch": 866,
+    "lastCommitBitmap": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff07",
+    "lastCommitSig": "1da26dd5f7d7a4c75851a9158012e0dbe9fad85521e948b28dc7a5512140ea25715b8a6491f6ea4efde099caeeaf9614697534ca8bb5e8c733107d32981e6ba8c24809c8c3fdce67da8e4b1c878037e2d676e79a8a5893ebccde7c9fa7dd1d04",
     "leader": "one1xdnm2fj6hyk7e49af2h9dmudkdlta9q354094e",
     "shardID": 2,
-    "timestamp": "2022-02-08 03:10:19 +0000 UTC",
-    "unixtime": 1644289819,
-    "viewID": 24790499,
-    "vrf": "c480139ff7c017bddb8a0d234ad0a1b615bae914358b7de3ce2eda21b3b52966",
-    "vrfProof": "a801289b3ba5e455a7576cf2094ec1299acfd7a29f875d40869a9bf604bad407a1a7f4da4fa412baf44822c5dd732909830353254987af85279031063f644009dba2dacad40b5ca5f22dec756987994705dcf4bb1c30d5687a98109517cb0b0b"
+    "timestamp": "2022-02-08 13:45:52 +0000 UTC",
+    "unixtime": 1644327952,
+    "viewID": 24809562,
+    "vrf": "eafc3c840702e60d1b1b962e95c34f8af603628045cb80bf59022c90e27829ae",
+    "vrfProof": "e34bc58d58e266b8070e4d0af1572ae010490aa0e8a12248b6fcb633798bc890347649be076cac1f3a89afc612770101d8d3362bb23827cdf857ec1b94b0e98231299d321f20667f933940b3af3fa325502429fbf3ec2c5f0cb3f196e1fe8181"
 }
