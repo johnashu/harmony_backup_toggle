@@ -1,8 +1,8 @@
 import asyncio
-from platform import node
-
 from includes.config import *
 from utils.setup_rpc import create_nodes_dict, swap_signer_backup, RPC
+
+# TODO: Function to query latency from Node to Leader Node.. Is it possible using a Nodes RPC?
 
 # 1.  Check that they are doing what they are supposed to do.. Check Flag and if required turn on for Signer and Flag off for Backup
 async def check_and_update_flag(node_type: str, rpc: RPC) -> bool:
@@ -65,7 +65,8 @@ async def swap_roles(i: int, v: dict, nodes_to_monitor: dict) -> dict:
     return nodes_to_monitor
 
 
-# 4. Check any other monitor nodes are alive! add simple uvicorn api and save an update every minute that can be checked by the other node.
+# 4. Check any other monitor nodes are alive!
+# TODO: add simple uvicorn api and save an update every minute that can be checked by the other node.
 async def check_other_monitors_alive(monitor_services: tuple) -> bool:
     for x in monitor_services:
         log.info(x)
@@ -120,7 +121,7 @@ async def check(nodes_to_monitor: list) -> dict:
 
 
 async def close_all_sessions(nodes_to_monitor: dict) -> None:
-    """Close all sessions that are open for a greaceful shutdown and to avoid Asynce logging error
+    """Close all sessions that are open for a greaceful shutdown and to avoid Async logging errors and clean up some memory or whatever :P
 
     Args:
         nodes_to_monitor (dict): Nodes and objects of sessions to close.
@@ -148,6 +149,8 @@ async def main() -> None:
             await close_all_sessions(nodes_to_monitor)
         except Exception as e:
             log.error(f"A general Erorr occurred in the main loop : {e}")
+        finally:
+            i += 1
 
 
 if __name__ == "__main__":

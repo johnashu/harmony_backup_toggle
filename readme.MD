@@ -25,7 +25,7 @@ If a node is uncontactable, then the program will turn on the backup node and sw
   RosettaPort = 9700
 ```
 
-# Open Port 9501 to the checking computer IP ONly
+# Open Port 9501 to the checking computer IP Only
 
 `sudo ufw allow from 86.81.155.21 to any port 9501`
 
@@ -70,9 +70,10 @@ sudo ufw enable
 Create CSV file (comma seperated) with the following info (No Header)
 
 Signer IP  |  Signer Nickname  | BackUp IP  |  BackUp NickName
-154.53.50.54,66.94.122.253
+555.666.777.888 ,Signer Node Name,111.222.333.444,Backup Node Name
 
 
-curl --location --request POST 'http://66.94.122.253:9501/' --header 'Content-Type: application/json' --data-raw '{"jsonrpc": "2.0","method" : "hmy_getNodeMetadata","params": [],"id": 1}' | jq
+curl --location --request POST 'http://111.222.333.444:9501/' --header 'Content-Type: application/json' --data-raw '{"jsonrpc": "2.0","method" : "hmy_getNodeMetadata","params": [],"id": 1}' | jq
+
 # restart instance Contabo
 https://api.contabo.com/#operation/restart
