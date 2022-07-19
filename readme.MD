@@ -69,11 +69,14 @@ sudo ufw enable
 
 Create CSV file (comma seperated) with the following info (No Header)
 
+```csv
+
 Signer IP  |  Signer Nickname  | BackUp IP  |  BackUp NickName
 555.666.777.888 ,Signer Node Name,111.222.333.444,Backup Node Name
 
+```
 
-curl --location --request POST 'http://111.222.333.444:9501/' --header 'Content-Type: application/json' --data-raw '{"jsonrpc": "2.0","method" : "hmy_getNodeMetadata","params": [],"id": 1}' | jq
+`curl --location --request POST 'http://111.222.333.444:9501/' --header 'Content-Type: application/json' --data-raw '{"jsonrpc": "2.0","method" : "hmy_getNodeMetadata","params": [],"id": 1}' | jq`
 
 # restart instance Contabo
 https://api.contabo.com/#operation/restart
